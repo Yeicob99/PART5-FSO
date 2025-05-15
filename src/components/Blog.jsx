@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-const Blog = ({ blog, handleLike }) => {
+const Blog = ({ blog, handleLike, handleDelete, user }) => {
   const [toggleBlog, setToggleblog] = useState(false)
 
   const containerStyle = {
@@ -24,6 +25,13 @@ const Blog = ({ blog, handleLike }) => {
     handleLike(blog.id)
   }
 
+  console.log('blog:', blog)
+  console.log('user:', user)
+
+  const blogUserId = typeof blog.author === 'object' ? blog.author.id : blog.author
+  const canDelete = user && blogUserId === user.id
+
+
   return (
     <div style={containerStyle}>
       <h3 style={textStyle}>{blog.title}</h3>
@@ -37,11 +45,23 @@ const Blog = ({ blog, handleLike }) => {
             URL: <a href={blog.url}>{blog.url}</a>
           </p>
           <p style={textStyle}>Likes: {blog.likes}</p>
+          <p style={textStyle}>Author: {typeof blog.author === 'object' ? blog.author.name : blog.author}</p>
           <button onClick={handleLikeClick}>Like</button>
+          {canDelete && (
+            <button onClick={() => handleDelete(blog)}> Delete </button>
+          )}
         </>
       )}
     </div>
   )
+
+}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  handleLike: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 }
 
 export default Blog
