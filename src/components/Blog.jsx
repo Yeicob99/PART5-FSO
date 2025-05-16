@@ -33,7 +33,7 @@ const Blog = ({ blog, handleLike, handleDelete, user }) => {
 
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className='blog-visible'>
       <h3 style={textStyle}>{blog.title}</h3>
       <button onClick={() => setToggleblog(!toggleBlog)}>
         {toggleBlog ? 'Hide' : 'View Details'}
