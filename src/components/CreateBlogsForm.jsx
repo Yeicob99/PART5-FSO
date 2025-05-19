@@ -41,7 +41,7 @@ const CreateBlogsForm = ({ createBlog }) => {
   }
 
   return (
-    <div>
+    <div className="formDiv">
       <div style={hideWhenVisible}>
         <button style={createButtonStyle} onClick={() => setBlogsVisible(true)}>Create Blogs</button>
       </div>
@@ -51,21 +51,21 @@ const CreateBlogsForm = ({ createBlog }) => {
           <h3>Create new Blog</h3>
           <div>
             Title:
-            <input
+            <input placeholder='title'
               value={title}
               onChange={({ target }) => setTitle(target.value)}
             />
           </div>
           <div>
             Author:
-            <input
+            <input placeholder='author'
               value={author}
               onChange={({ target }) => setAuthor(target.value)}
             />
           </div>
           <div>
             URL:
-            <input
+            <input placeholder='url'
               value={url}
               onChange={({ target }) => setUrl(target.value)}
             />

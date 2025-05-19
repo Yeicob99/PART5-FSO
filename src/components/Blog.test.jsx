@@ -16,7 +16,10 @@ test('renders title and author, but not url or likes by default', () => {
         id: "123"
     }
 
-    render(<Blog blog={blog} user={user} handleLike={vi.fn()} handleDelete={vi.fn()} />)
+    const mockHandleLike = vi.fn()
+    
+
+    render(<Blog blog={blog} user={user} handleLike={mockHandleLike} handleDelete={vi.fn()} />)
 
     const title = screen.getByText('Test Blog')
     expect(title).toBeDefined()
@@ -29,4 +32,11 @@ test('renders title and author, but not url or likes by default', () => {
 
     expect(screen.getByText('https://testblog.com')).toBeDefined()
     expect(screen.getByText('Likes: 10')).toBeDefined()
+    
+    const likeButton = screen.getByText('Like')
+    fireEvent.click(likeButton)
+    fireEvent.click(likeButton)
+
+    expect(mockHandleLike).toHaveBeenCalledTimes(2)
+
 })
